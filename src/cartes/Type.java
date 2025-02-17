@@ -1,8 +1,8 @@
-package mille_bornes;
+package cartes;
 
 public enum Type {
-	FEU("Feu Rouge","Feu Vert","Véhicule Prioritaire"), ESSENCE("Panne D'Essence","Essence","Citerne D'Essence"), 
-	CREVAISON("Crevaison","Roue De Secours","Increvable"), ACCIDENT("Accident","Réparations","As Du Volant");
+	FEU("Feu Rouge","Feu Vert","Vehicule Prioritaire"), ESSENCE("Panne D'Essence","Bidon d'Essence","Citerne D'Essence"), 
+	CREVAISON("Crevaison","Roue De Secours","Increvable"), ACCIDENT("Accident","Reparations","As Du Volant");
 	private final String nomAttaque;
 	private final String nomParade;
 	private final String nomBotte;

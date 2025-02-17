@@ -1,4 +1,4 @@
-package mille_bornes;
+package cartes;
 
 public class Borne extends Carte {
 	 private int km;
@@ -6,6 +6,11 @@ public class Borne extends Carte {
 	public Borne(int km) {
 		super();
 		this.km = km;
+	}
+
+	@Override
+	public String toString() {
+		return  km + " KM";
 	}
 	 
 }

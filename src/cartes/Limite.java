@@ -1,5 +1,5 @@
-package mille_bornes;
+package cartes;
 
 public abstract class Limite extends Carte {
-
+	
 }

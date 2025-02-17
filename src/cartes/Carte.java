@@ -1,4 +1,4 @@
-package mille_bornes;
+package cartes;
 
 public abstract class Carte {
 

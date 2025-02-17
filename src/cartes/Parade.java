@@ -1,15 +1,15 @@
-package mille_bornes;
+package cartes;
 
-public class Botte extends Probleme {
+public class Parade extends Bataille {
 
-	public Botte(Type type) {
+	public Parade(Type type) {
 		super(type);
 		// TODO Auto-generated constructor stub
 	}
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return super.getType().getNomBotte();
+		return super.getType().getNomParade();
 	}
 
 }
