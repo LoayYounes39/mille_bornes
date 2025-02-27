@@ -73,7 +73,7 @@ public class Sabot implements Iterable<Carte> {
 					cartes[i] = cartes[i+1];
 				}
 				nextEffectue = false;
-				nbCartes ++;
+				nbCartes --;
 				nbOperations ++;
 				nbOperationsRef ++;
 			}
