@@ -51,6 +51,25 @@ public class JeuDeCartes {
 		}
 		return cartes;
 	}
+	public boolean checkCount() {
+		Carte[] cartes = donnerCartes();
+		for (Configuration configuration : typesDeCartes) {
+			int nombreCartes = 0;
+			for (Carte carte : cartes) {
+				if (carte.getClass() == configuration.getCarte().getClass()) {
+					nombreCartes ++;
+				}
+			}
+			if (nombreCartes > configuration.getNbExemplaires()) {
+				return false;
+			}
+		}
+		// Solution plus efficace : Tableau de configurations créé avec des configurations initialisés 
+		// tous à 0 , remplir au fur et à mesure 
+		// Puis check si ce tableau est équivalent au tableau de Configurations.
+		
+		return true;
+	}
 	
 
 }

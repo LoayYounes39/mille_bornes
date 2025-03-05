@@ -12,19 +12,19 @@ public class TestSabot {
 		Carte[] cartes = jc.donnerCartes();
 		Sabot sabot = new Sabot(cartes);
 		int nbCartes = sabot.getNbCartes();
-		// La méthode de piocher (petit a)
-		// Insérer l'as du volant lève NoSuchElementException (petit c)
-		System.out.println( "Je pioche " + sabot.piocher().toString());
-		for (int i = 0; i < nbCartes; i++) {
+		// La methode de piocher (petit a)
+		// Inserer l'as du volant  NoSuchElementException (petit c)
+		//System.out.println( "Je pioche " + sabot.piocher().toString());
+		/*for (int i = 0; i < nbCartes; i++) {
 			System.out.println( "Je pioche " + sabot.piocher().toString());
-		}
-		// la méthode de itérateur + remove */ (petit b)
+		}*/
+		// la methode de iterateur + remove */ (petit b)
 		Iterator<Carte> it = sabot.iterator();
 		for (int i = 0; i < nbCartes; i++) {
 			Carte prochaineCarte = it.next();
 			System.out.println("Je pioche " + prochaineCarte.toString());
 			it.remove();
-			// Ça met Concurrent modification exception (petit c)
+			//Concurrent modification exception (petit c)
 			System.out.println("Je pioche " + sabot.piocher().toString());
 		}
 		
