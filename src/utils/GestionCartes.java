@@ -53,13 +53,13 @@ public class GestionCartes <E extends Carte>{
 		}
 		return true;
 	}
-	public static <E> List<E> rassembler(List<E> listeRandom){
+	public static <E> List<E> rassemblerV2(List<E> listeRandom){
 		ArrayList<E> listeRangee = new ArrayList<E>();
-		ListIterator<E> it = (ListIterator<E>) listeRandom.iterator();
+		Iterator<E> it = (ListIterator<E>) listeRandom.listIterator();
 		while (it.hasNext()) {
 			E elementCour = it.next();
 			if (! listeRangee.contains(elementCour)) {
-				ListIterator<E> it2 = (ListIterator<E>) listeRandom.iterator(); 
+				Iterator<E> it2 = (ListIterator<E>) listeRandom.listIterator(); 
 				while (it2.hasNext()) {
 					if (it2.next().equals(elementCour)) {
 						listeRangee.add(elementCour);
@@ -76,8 +76,8 @@ public class GestionCartes <E extends Carte>{
 			int nextIndex = it.nextIndex();
 			ListIterator<E> it2 = (ListIterator<E>) liste.listIterator(nextIndex);
 			while (it2.hasNext()) {
-				E elementComp = it.next();
-				if (elementComp.equals(elementCour) && it2.nextIndex() != nextIndex + 1) {
+				E elementComp = it2.next();
+				if (elementComp.equals(elementCour) && nextIndex + 1 !=  it2.nextIndex()) {
 					return false;
 				} else if (elementComp.equals(elementCour)) {
 					nextIndex++;

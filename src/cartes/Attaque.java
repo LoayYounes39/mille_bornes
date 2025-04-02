@@ -8,7 +8,7 @@ public class Attaque extends Bataille {
 	}
 	@Override
 	public String toString() {
-		return super.toString() + getType().getNomAttaque();
+		return getType().getNomAttaque();
 	}
 	
 	
