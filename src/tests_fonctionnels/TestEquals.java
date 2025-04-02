@@ -15,7 +15,7 @@ public class TestEquals {
 		Parade feuVert_1 = new Parade(Type.FEU);
 		System.out.println("Deux cartes de 25km sont identiques ? " + carte25_1.equals(carte25_2));
 		System.out.println("Deux cartes feu rouge sont identiques ? " + feuRouge_1.equals(feuRouge_2));
-		System.out.println("La carte feu rouge est identique à la carte feu Vert ?" + feuRouge_1.equals(feuVert_1));
+		System.out.println("La carte feu rouge est identique a la carte feu Vert ?" + feuRouge_1.equals(feuVert_1));
 	}
 	
 }

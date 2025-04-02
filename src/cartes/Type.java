@@ -20,5 +20,4 @@ public enum Type {
 	public String getNomBotte() {
 		return nomBotte;
 	}
-	
 }

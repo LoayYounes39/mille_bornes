@@ -11,5 +11,14 @@ public class Botte extends Probleme {
 		// TODO Auto-generated method stub
 		return super.getType().getNomBotte();
 	}
+	@Override
+	public boolean equals(Object obj) {
+		boolean estEgal = super.equals(obj);
+		if (estEgal) {
+			Botte botte = (Botte)obj;
+			return getType().getNomBotte().equals(botte.getType().getNomBotte());
+		}
+		return estEgal;
+	}
 
 }
