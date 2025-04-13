@@ -15,7 +15,7 @@ public abstract class Probleme extends Carte {
 
 
 
-	protected Type getType() {
+	public Type getType() {
 		return type;
 	}
 
