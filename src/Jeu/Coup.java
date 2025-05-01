@@ -9,9 +9,9 @@ import cartes.Carte;
 import cartes.Limite;
 
 public class Coup {
-	Joueur joueurCourant; 
-	Carte carteJouee; 
-	Joueur joueurCible;
+	private Joueur joueurCourant; 
+	private Carte carteJouee; 
+	private Joueur joueurCible;
 	public Coup(Joueur joueurCourant, Carte carteJouee, Joueur joueurCible) {
 		super();
 		this.joueurCourant = joueurCourant;
@@ -32,6 +32,16 @@ public class Coup {
 			return ! joueurCible.equals(joueurCourant);
 		}
 		return true;
+	}
+	@Override
+	public String toString() {
+		if (joueurCible == null) {
+			return "defausse la carte " + carteJouee;
+		}
+		if (joueurCible.equals(joueurCourant)) {
+			return "depose la carte " + carteJouee + " dans sa zone de jeu" ;
+		}
+		return "depose la carte " + carteJouee + " dans la zone de jeu de " + joueurCible;
 	}
 	
 }

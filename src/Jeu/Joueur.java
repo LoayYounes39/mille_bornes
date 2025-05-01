@@ -2,7 +2,9 @@ package Jeu;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.Random;
 import java.util.Set;
 
 import cartes.Carte;
@@ -48,39 +50,64 @@ public class Joueur {
 	public void deposer(Carte c) {
 		zone.deposer(c);
 	}
+	public void deposerJoueurCible (Joueur joueur, Carte carte) {
+		ZoneDeJeu zone = joueur.getZone(); 
+		zone.deposer(carte);
+	}
 	public ZoneDeJeu getZone() {
 		return zone;
 	}
-	public HashSet<Coup> coupsPossibles(Set<Joueur> participants){
-		HashSet<Coup> coups = new HashSet<>();
-		for (Joueur participant : participants) {
-			MainJoueur mainJ = participant.getMain();
-			ListIterator<Carte> itCartes = mainJ.getListeCartes().listIterator();
-			while (itCartes.hasNext()) {
-				Carte carte = itCartes.next();
-				Coup coup = new Coup(this, carte, participant);
-				if (coup.estValide()) {
-					coups.add(coup);
-				}
-			}
-		}
-		return coups;
-	}
-	public HashSet<Coup> coupsDefausse(){
-		HashSet<Coup> coups = new HashSet<>();
-		ListIterator<Carte> itCartes = main.getListeCartes().listIterator();
+	private void ajouterCoups ( Set<Coup> coups, Iterator<Carte> itCartes, Joueur participant) {
 		while (itCartes.hasNext()) {
 			Carte carte = itCartes.next();
-			Coup coup = new Coup(this, carte, null);
+			Coup coup = new Coup(this, carte, participant);
 			if (coup.estValide()) {
 				coups.add(coup);
 			}
 		}
+	}
+	public HashSet<Coup> coupsPossibles(Set<Joueur> participants){
+		HashSet<Coup> coups = new HashSet<>();
+		for (Joueur participant : participants) {
+			ListIterator<Carte> itCartes = main.getListeCartes().listIterator();
+			ajouterCoups (coups,itCartes, participant);
+		}
 		return coups;
 	}
-	public void retirerDeLaMain(Carte carte) {
-		main.getListeCartes().remove(carte);
-	}
- 
 	
+	public HashSet<Coup> coupsDefausse(){
+		HashSet<Coup> coups = new HashSet<>();
+		ListIterator<Carte> itCartes = main.getListeCartes().listIterator();
+		ajouterCoups (coups,itCartes, null);
+		return coups;
+	}
+	
+	public void retirerDeLaMain(Carte carte) {
+		main.jouer(carte);
+	}
+	private Coup choisirCoupAleatoire (Set<Coup> coups){
+		Random rnd = new Random();
+		Iterator<Coup> itCoups = coups.iterator();
+		for (int ind = rnd.nextInt(coups.size()) ; ind > 0; ind --) {
+			itCoups.next();
+		}
+		return itCoups.next(); 
+	}
+	public Coup choisirCoup (Set<Joueur> participants) {
+		// L'ordre pour le hashset est aléatoire (Pourant il est conservé)	
+		Set <Coup> coupsPos = (HashSet<Coup>) coupsPossibles(participants);
+		if ( coupsPos.isEmpty() ) {
+			return choisirCoupAleatoire(coupsDefausse());
+		}
+			return choisirCoupAleatoire(coupsPos);
+		}
+	public String afficherEtatJoueur() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(zone.getBottes() + "\n");
+		sb.append(zone.isPileLimitesEmpty() + "\n");
+		sb.append(zone.sommetPileBatailles() + "\n");
+		sb.append(main.getListeCartes() + "\n");
+		return sb.toString();
+	}
+
 }

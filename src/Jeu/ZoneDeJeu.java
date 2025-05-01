@@ -17,10 +17,11 @@ import cartes.Carte;
 import cartes.DebutLimite;
 import cartes.FinLimite;
 public class ZoneDeJeu {
-	LinkedList <Limite> pileLimites = new LinkedList<Limite>();
-	LinkedList <Bataille> pileBatailles = new LinkedList<Bataille>();
-	Collection<Borne> collectionBornes = new LinkedList<Borne>();
-	Set <Botte> bottes = new HashSet <>();
+	private LinkedList <Limite> pileLimites = new LinkedList<Limite>();
+	private LinkedList <Bataille> pileBatailles = new LinkedList<Bataille>();
+	private Collection<Borne> collectionBornes = new LinkedList<Borne>();
+	private Set <Botte> bottes = new HashSet <>();
+	
 	public int donnerLimitationVitesse() {
 		if (estPrioritaire()) {
 			return 0;
@@ -126,6 +127,19 @@ public class ZoneDeJeu {
 	 public boolean estPrioritaire() {
 		 return bottes.contains(Cartes.PRIORITAIRE);
 	 }
+	public Set<Botte> getBottes() {
+		return bottes;
+	}
+	public boolean isPileLimitesEmpty() {
+		return pileLimites.isEmpty();
+	}
+	public Bataille sommetPileBatailles() {
+		if (pileBatailles.isEmpty()) {
+			return null;
+		}
+		return pileBatailles.getFirst();
+	}
+	
 	 
 
 }
