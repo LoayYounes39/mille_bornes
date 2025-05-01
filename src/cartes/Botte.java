@@ -20,5 +20,9 @@ public class Botte extends Probleme {
 		}
 		return estEgal;
 	}
-
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return getType().getNomBotte().hashCode() * 31;
+	}
 }

@@ -1,6 +1,9 @@
 package Jeu;
 
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.ListIterator;
+import java.util.Set;
 
 import cartes.Carte;
 
@@ -48,5 +51,36 @@ public class Joueur {
 	public ZoneDeJeu getZone() {
 		return zone;
 	}
+	public HashSet<Coup> coupsPossibles(Set<Joueur> participants){
+		HashSet<Coup> coups = new HashSet<>();
+		for (Joueur participant : participants) {
+			MainJoueur mainJ = participant.getMain();
+			ListIterator<Carte> itCartes = mainJ.getListeCartes().listIterator();
+			while (itCartes.hasNext()) {
+				Carte carte = itCartes.next();
+				Coup coup = new Coup(this, carte, participant);
+				if (coup.estValide()) {
+					coups.add(coup);
+				}
+			}
+		}
+		return coups;
+	}
+	public HashSet<Coup> coupsDefausse(){
+		HashSet<Coup> coups = new HashSet<>();
+		ListIterator<Carte> itCartes = main.getListeCartes().listIterator();
+		while (itCartes.hasNext()) {
+			Carte carte = itCartes.next();
+			Coup coup = new Coup(this, carte, null);
+			if (coup.estValide()) {
+				coups.add(coup);
+			}
+		}
+		return coups;
+	}
+	public void retirerDeLaMain(Carte carte) {
+		main.getListeCartes().remove(carte);
+	}
+ 
 	
 }

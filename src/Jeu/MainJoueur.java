@@ -8,7 +8,7 @@ import java.util.ListIterator;
 import cartes.Carte;
 
 public class MainJoueur implements Iterable<Carte>{
-	List <Carte> listeCartes = new LinkedList<>();
+	private List <Carte> listeCartes = new LinkedList<>();
 	
 	public MainJoueur() {
 		
@@ -33,5 +33,9 @@ public class MainJoueur implements Iterable<Carte>{
 	public Iterator<Carte> iterator() {
 		return listeCartes.iterator();
 	}
+	public List<Carte> getListeCartes() {
+		return listeCartes;
+	}
+	
 	
 }
