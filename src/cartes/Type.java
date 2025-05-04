@@ -1,8 +1,8 @@
 package cartes;
 
-public enum Type {
-	FEU("Feu Rouge","Feu Vert","Vehicule Prioritaire"), ESSENCE("Panne D'Essence","Bidon d'Essence","Citerne D'Essence"), 
-	CREVAISON("Crevaison","Roue De Secours","Increvable"), ACCIDENT("Accident","Reparations","As Du Volant");
+public enum Type{
+	ACCIDENT("Accident","Reparations","As Du Volant"), CREVAISON("Crevaison","Roue De Secours","Increvable"), 
+	ESSENCE("Panne D'Essence","Bidon d'Essence","Citerne D'Essence"), FEU("Feu Rouge","Feu Vert","Vehicule Prioritaire");
 	private final String nomAttaque;
 	private final String nomParade;
 	private final String nomBotte;
@@ -20,4 +20,5 @@ public enum Type {
 	public String getNomBotte() {
 		return nomBotte;
 	}
+	
 }

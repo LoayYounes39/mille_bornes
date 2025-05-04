@@ -22,10 +22,10 @@ public class MainJoueur implements Iterable<Carte>{
 	}
 	@Override
 	public String toString() {
-		Iterator<Carte> it = iterator();
+		Iterator<Carte> it = listeCartes.iterator();
 		StringBuilder sb = new StringBuilder();
 		while (it.hasNext()) {
-			sb.append(it.next().toString()).append("\n");
+			sb.append(it.next()).append("\n");
 		}
 		return sb.toString();
 	}

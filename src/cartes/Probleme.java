@@ -2,7 +2,7 @@ package cartes;
 
 import java.util.Objects;
 
-public abstract class Probleme extends Carte {
+public abstract class Probleme extends Carte implements Comparable<Probleme>{
 	private Type type;
 
 	
@@ -33,8 +33,11 @@ public abstract class Probleme extends Carte {
 	public int hashCode() {
 		return Objects.hash(type);
 	}
-
-
+	
+	@Override 
+	public int compareTo(Probleme probleme) {
+		return type.compareTo(probleme.type);
+	}
 
 
 

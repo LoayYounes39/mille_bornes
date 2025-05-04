@@ -1,6 +1,6 @@
 package cartes;
 
-public class Borne extends Carte {
+public class Borne extends Carte implements Comparable<Borne>{
 	 private int km;
 
 	public Borne(int km) {
@@ -25,4 +25,11 @@ public class Borne extends Carte {
 		}
 		return estEgal;
 	}
+
+	@Override
+	public int compareTo(Borne o) {
+		return km - o.getKm();
+	}
+	
+	
 }

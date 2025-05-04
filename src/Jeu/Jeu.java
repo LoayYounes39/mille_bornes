@@ -2,13 +2,19 @@ package Jeu;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.NavigableSet;
+import java.util.TreeSet;
 
 import cartes.Carte;
 import cartes.JeuDeCartes;
+import strategies.Strategie;
 import utils.GestionCartes;
 
 public class Jeu {
@@ -16,7 +22,7 @@ public class Jeu {
 	private static final int NB_CARTES = 6;
 	HashSet<Joueur> joueurs = new LinkedHashSet<>();
 	Iterator<Joueur> it = joueurs.iterator();
-	
+
 	public Jeu() {
 		JeuDeCartes jc = new JeuDeCartes();
 		Carte[] tabCartes = jc.donnerCartes();
@@ -69,10 +75,16 @@ public class Jeu {
 		do {
 			joueur = donnerJoueurSuivant(); 
 			sb.append(jouerTour(joueur));
-		} while (joueur.donnerKmParcourus() < 1000);
-		if (! sabot.estVide()) {
+		} while (! sabot.estVide() && joueur.donnerKmParcourus() < 1000);
+		while (! sabot.estVide()) {
+			joueur = donnerJoueurSuivant(); 
 			sb.append(jouerTour(joueur));
 		}
+		List<Joueur> listClassement = (LinkedList<Joueur>) classement();
+		
+		sb.append(listClassement).append("\n");
+		Joueur vainqueur = listClassement.get(0);
+		sb.append("Le vainqueur c'est ").append(vainqueur).append(" ").append(vainqueur.donnerKmParcourus());
 		return sb.toString();
 	}
 	public Joueur donnerJoueurSuivant () {
@@ -81,5 +93,20 @@ public class Jeu {
 		}
 		return it.next();
 	}
+	
+	public LinkedList <Joueur> classement(){
+		NavigableSet<Joueur> ensembleTrie = 
+				new TreeSet (new Comparator<Joueur>() {
+					@Override
+					public int compare(Joueur o1, Joueur o2) {
+						return o2.donnerKmParcourus() - o1.donnerKmParcourus();
+					}
+				});
+		ensembleTrie.addAll(joueurs);
+		List<Joueur> listJoueurs = new LinkedList<>(ensembleTrie); 
+		return (LinkedList<Joueur>) listJoueurs;
+	}
+	
+	
 	
 }

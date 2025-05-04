@@ -6,13 +6,26 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Random;
 import java.util.Set;
+import java.util.TreeSet;
 
+import cartes.Botte;
 import cartes.Carte;
+import strategies.Strategie;
 
-public class Joueur {
+public class Joueur implements Comparable<Joueur> {
 	String nom; 
 	ZoneDeJeu zone; 
 	MainJoueur main = new MainJoueur();
+	
+	private Strategie strategie = new Strategie() {
+		
+	};
+	
+	
+	
+	public void setStrategie(Strategie strategie) {
+		this.strategie = strategie;
+	}
 	
 	public Joueur(String nom, ZoneDeJeu zone) {
 		super();
@@ -95,11 +108,12 @@ public class Joueur {
 	}
 	public Coup choisirCoup (Set<Joueur> participants) {
 		// L'ordre pour le hashset est aléatoire (Pourant il est conservé)	
-		Set <Coup> coupsPos = (HashSet<Coup>) coupsPossibles(participants);
+		HashSet <Coup> coupsPos = (HashSet<Coup>) coupsPossibles(participants);
 		if ( coupsPos.isEmpty() ) {
-			return choisirCoupAleatoire(coupsDefausse());
+			//return choisirCoupAleatoire(coupsDefausse());
+			return strategie.selectionnerDefausse(coupsDefausse());
 		}
-			return choisirCoupAleatoire(coupsPos);
+			return strategie.selectionnerCoup(coupsPos);
 		}
 	public String afficherEtatJoueur() {
 		StringBuilder sb = new StringBuilder();
@@ -108,6 +122,23 @@ public class Joueur {
 		sb.append(zone.sommetPileBatailles() + "\n");
 		sb.append(main.getListeCartes() + "\n");
 		return sb.toString();
+	}
+
+	@Override
+	public int compareTo(Joueur o) {
+		int difKm = donnerKmParcourus() - o.donnerKmParcourus();
+		if (difKm == 0) {
+			return nom.compareTo(o.nom);
+		}
+		return difKm;
+	}
+
+	public Carte donnerSommetPile() {
+		return zone.sommetPileBatailles();
+	}
+
+	public Set<Botte> donnerBottes() {
+		return zone.getBottes();
 	}
 
 }

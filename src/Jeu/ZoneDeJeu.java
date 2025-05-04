@@ -124,7 +124,7 @@ public class ZoneDeJeu {
 		 }
 		 return false;
 	 }
-	 public boolean estPrioritaire() {
+	 private boolean estPrioritaire() {
 		 return bottes.contains(Cartes.PRIORITAIRE);
 	 }
 	public Set<Botte> getBottes() {
